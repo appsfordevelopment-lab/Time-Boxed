@@ -182,8 +182,9 @@ router.post('/verify-otp', async (req, res) => {
       });
     }
 
-    // Mark as verified
+    // Mark as verified and save in OTP table (login record)
     otpRecord.verified = true;
+    otpRecord.verifiedAt = new Date();
     await otpRecord.save();
 
     // Generate a simple token (you can use JWT here if needed)
