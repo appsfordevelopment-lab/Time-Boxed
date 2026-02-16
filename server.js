@@ -36,20 +36,27 @@ app.use('/api/auth', authRoutes);
 app.get('/', (req, res) => {
   res.json({
     status: 'ok',
-    message: 'Time Boxed API',
+    message: 'Tyme Boxed API',
     health: '/health',
+    ping: '/api/ping',
     api: '/api/nfc/verify'
   });
 });
 
 // Health check endpoint
 app.get('/health', (req, res) => {
-  res.json({ status: 'ok', message: 'Time Boxed API is running' });
+  res.json({ status: 'ok', message: 'Tyme Boxed API is running' });
+});
+
+// Lightweight keepalive endpoint - ideal for Render free tier (avoids 50s cold starts)
+// Use UptimeRobot or Cron-job.org to hit this every 10-14 minutes
+app.get('/api/ping', (req, res) => {
+  res.status(204).end();
 });
 
 // Start server
 app.listen(PORT, () => {
-  console.log(`\n Time Boxed API Server running on port ${PORT}`);
+  console.log(`\n Tyme Boxed API Server running on port ${PORT}`);
   console.log(`Health check: http://localhost:${PORT}/health`);
   console.log(`NFC Verify: POST http://localhost:${PORT}/api/nfc/verify (no auth required)\n`);
 });
