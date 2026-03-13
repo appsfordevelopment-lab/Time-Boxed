@@ -179,7 +179,7 @@ router.post('/send-otp', async (req, res) => {
       });
 
       const fromAddress =
-        process.env.EMAIL_FROM || 'TymeBoxed <onboarding@resend.dev>';
+        process.env.EMAIL_FROM || 'Tyme Boxed <noreply@tymeboxed.app>';
       const { data: sendData, error: sendError } =
         await resendClient.emails.send({
           from: fromAddress,
